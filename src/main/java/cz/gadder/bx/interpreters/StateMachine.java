@@ -1,20 +1,27 @@
 package cz.gadder.bx.interpreters;
 
 import cz.gadder.bx.mappings.ValueMapping;
-import cz.gadder.bx.mappings.ValueMappingFactory;
+import lombok.Getter;
+import lombok.Setter;
+import org.jspecify.annotations.Nullable;
+
 
 public class StateMachine {
 
     private final Tape tape;
     private final ValueMapping valueMapping;
+    @Setter
+    @Getter
+    @Nullable
+    private StateMachine nextStateMachine;
+    @Setter
+    @Getter
+    @Nullable
+    private StateMachine previousStateMachine;
 
     private StateMachine(ValueMapping valueMapping, MemorySectorSize sectorSize) {
         this.tape = Tape.create(sectorSize);
         this.valueMapping = valueMapping;
-    }
-
-    public static StateMachine of() {
-        return new StateMachine(ValueMappingFactory.createDefault(), MemorySectorSize.createByteSize());
     }
 
     public static StateMachine of(StateMachineSettings settings) {

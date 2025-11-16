@@ -20,8 +20,8 @@ class BFInterpreterTest {
     void simpleIncrementationTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("+++++"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isZero();
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isZero();
     }
 
     @Test
@@ -29,8 +29,8 @@ class BFInterpreterTest {
     void simpleDecrementationTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("-----"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 251);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isZero();
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 251);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isZero();
     }
 
     @Test
@@ -38,8 +38,8 @@ class BFInterpreterTest {
     void negativeMemorySegmentsTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("<<<<<+++++"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isEqualTo(-5);
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isEqualTo(-5);
     }
 
     @Test
@@ -47,8 +47,8 @@ class BFInterpreterTest {
     void ignoreUnknownInstructionsTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("#+v+ \n+aa+T_X_Y_Z_+"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isZero();
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 5);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isZero();
     }
 
     @Test
@@ -56,13 +56,13 @@ class BFInterpreterTest {
     void tapeIterationsTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("+>>>--<<<"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 1);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isZero();
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 1);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isZero();
 
-        interpreter.getStateMachine().incrementActiveMemoryIndex();
-        interpreter.getStateMachine().incrementActiveMemoryIndex();
-        interpreter.getStateMachine().incrementActiveMemoryIndex();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 254);
+        interpreter.getActiveStateMachine().incrementActiveMemoryIndex();
+        interpreter.getActiveStateMachine().incrementActiveMemoryIndex();
+        interpreter.getActiveStateMachine().incrementActiveMemoryIndex();
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 254);
     }
 
     @Test
@@ -70,8 +70,8 @@ class BFInterpreterTest {
     void tapeSingleCycleTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("+[>+++<-]>"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 3);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 3);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
     }
 
     @Test
@@ -79,8 +79,8 @@ class BFInterpreterTest {
     void tapeMultiIterationCycleTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("+++[>+++<-]>"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 9);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 9);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
     }
 
     @Test
@@ -88,11 +88,11 @@ class BFInterpreterTest {
     void emptyCycleTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("[>+++<-]>"));
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 0);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 0);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isEqualTo(1);
 
-        interpreter.getStateMachine().decrementActiveMemoryIndex();
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isZero();
+        interpreter.getActiveStateMachine().decrementActiveMemoryIndex();
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isZero();
     }
 
     @Test
@@ -100,7 +100,7 @@ class BFInterpreterTest {
     void innerCyclesTest() {
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from("+++[>+++[>+++<-]<-]>>")); // 3*3*3
         assertThat(interpreter.runProgram()).isZero();
-        assertThat(interpreter.getStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 27);
-        assertThat(interpreter.getStateMachine().getActiveMemorySectorIndex()).isEqualTo(2);
+        assertThat(interpreter.getActiveStateMachine().getValueAtActiveMemorySector()).isEqualTo((char) 27);
+        assertThat(interpreter.getActiveStateMachine().getActiveMemorySectorIndex()).isEqualTo(2);
     }
 }

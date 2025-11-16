@@ -13,8 +13,12 @@ public enum InstructionType {
     PRINT_DATA_FROM_ACTIVE_MEMORY('.'),
     READ_INPUT_TO_ACTIVE_MEMORY(','),
     ITERATION_START('['),
-    ITERATION_END(']');
+    ITERATION_END(']'),
+
+    SWITCH_TO_NEXT_TAPE('▲'),
+    SWITCH_TO_PREVIOUS_TAPE('▼')
+
+    ;
 
     private final char defaultInstructionCode;
-
 }

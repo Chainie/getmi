@@ -4,11 +4,16 @@ import cz.gadder.bx.Program;
 
 public interface Interpreter {
 
-    StateMachine getStateMachine();
+    StateMachine getActiveStateMachine();
 
     Program getProgram();
 
     void resolveIterationEnd(char instruction, char matchingInstruction);
 
     void resolveIterationStart(char instruction, char matchingInstruction);
+
+    void switchToNextStateMachine();
+
+    void switchToPreviousStateMachine();
+
 }

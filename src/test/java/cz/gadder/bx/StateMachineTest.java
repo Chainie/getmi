@@ -30,7 +30,7 @@ class StateMachineTest {
     @Test
     @DisplayName("All basic operations over state machine works")
     void simpleMachineTest() throws IOException {
-        StateMachine stateMachine = StateMachine.of();
+        StateMachine stateMachine = StateMachine.of(InterpreterManifest.createDefault());
 
         assertThat(stateMachine.getValueAtActiveMemorySector()).isEqualTo((char) 0);
         assertThat(stateMachine.getActiveMemorySectorIndex()).isZero();
