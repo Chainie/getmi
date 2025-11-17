@@ -1,6 +1,6 @@
 package cz.gadder.bx.instructions;
 
-import cz.gadder.bx.interpreters.Interpreter;
+import cz.gadder.bx.interpreter.Interpreter;
 
 import java.util.function.Consumer;
 

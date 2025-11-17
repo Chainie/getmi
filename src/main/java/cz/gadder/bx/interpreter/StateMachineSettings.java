@@ -1,4 +1,4 @@
-package cz.gadder.bx.interpreters;
+package cz.gadder.bx.interpreter;
 
 import cz.gadder.bx.mappings.ValueMapping;
 

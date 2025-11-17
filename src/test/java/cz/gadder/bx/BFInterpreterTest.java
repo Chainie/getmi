@@ -1,6 +1,7 @@
 package cz.gadder.bx;
 
-import cz.gadder.bx.interpreters.MachineInterpreter;
+import cz.gadder.bx.interpreter.MachineInterpreter;
+import cz.gadder.bx.interpreter.Program;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -16,9 +16,7 @@ public enum InstructionType {
     ITERATION_END(']'),
 
     SWITCH_TO_NEXT_TAPE('▲'),
-    SWITCH_TO_PREVIOUS_TAPE('▼')
-
-    ;
+    SWITCH_TO_PREVIOUS_TAPE('▼');
 
     private final char defaultInstructionCode;
 }

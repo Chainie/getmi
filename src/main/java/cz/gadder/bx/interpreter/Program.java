@@ -1,4 +1,4 @@
-package cz.gadder.bx;
+package cz.gadder.bx.interpreter;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

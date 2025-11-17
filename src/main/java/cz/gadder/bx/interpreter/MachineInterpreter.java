@@ -1,10 +1,9 @@
-package cz.gadder.bx.interpreters;
+package cz.gadder.bx.interpreter;
 
-import cz.gadder.bx.InterpreterManifest;
-import cz.gadder.bx.Program;
 import cz.gadder.bx.instructions.Instruction;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Map;
@@ -45,9 +44,13 @@ public class MachineInterpreter implements Interpreter {
         return new MachineInterpreter(program, manifest);
     }
 
+    @SneakyThrows
     public int runProgram() {
         while (program.isNotFinished()) {
             executeNextInstruction();
+            if (manifest.stepDelay().isPositive()) {
+               Thread.sleep(manifest.stepDelay());
+            }
         }
         return 0;
     }

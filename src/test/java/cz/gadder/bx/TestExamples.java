@@ -1,8 +1,10 @@
 package cz.gadder.bx;
 
 import cz.gadder.bx.instructions.InstructionMapFactory;
-import cz.gadder.bx.interpreters.MachineInterpreter;
-import cz.gadder.bx.interpreters.MemorySectorSize;
+import cz.gadder.bx.interpreter.InterpreterManifest;
+import cz.gadder.bx.interpreter.MachineInterpreter;
+import cz.gadder.bx.interpreter.MemorySectorSize;
+import cz.gadder.bx.interpreter.Program;
 import cz.gadder.bx.mappings.ValueMapping;
 import cz.gadder.bx.mappings.ValueMappingFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,7 +77,8 @@ class TestExamples {
         InterpreterManifest manifest = InterpreterManifest.create(
                 valueMapping,
                 InstructionMapFactory.createBFInstructionMap(),
-                memorySectorSize
+                memorySectorSize,
+                Duration.ZERO
         );
 
         Program program = Program.from(".+.+..+.+.+.+.---.++++.-----.++++++.+.");
@@ -103,7 +107,8 @@ class TestExamples {
         InterpreterManifest manifest = InterpreterManifest.create(
                 valueMapping,
                 InstructionMapFactory.createBFInstructionMap(),
-                MemorySectorSize.createByteSize()
+                MemorySectorSize.createByteSize(),
+                Duration.ZERO
         );
 
         Program program = Program.from("++++.");
@@ -123,7 +128,8 @@ class TestExamples {
         InterpreterManifest manifest = InterpreterManifest.create(
                 valueMapping,
                 InstructionMapFactory.createBFInstructionMap(),
-                MemorySectorSize.createByteSize()
+                MemorySectorSize.createByteSize(),
+                Duration.ZERO
         );
         String input = ("a");
         InputStream testInput = new ByteArrayInputStream(input.getBytes());

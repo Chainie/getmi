@@ -1,8 +1,10 @@
 package cz.gadder.bx;
 
 import cz.gadder.bx.instructions.InstructionMapFactory;
-import cz.gadder.bx.interpreters.MachineInterpreter;
-import cz.gadder.bx.interpreters.MemorySectorSize;
+import cz.gadder.bx.interpreter.InterpreterManifest;
+import cz.gadder.bx.interpreter.MachineInterpreter;
+import cz.gadder.bx.interpreter.MemorySectorSize;
+import cz.gadder.bx.interpreter.Program;
 import cz.gadder.bx.mappings.ValueMapping;
 import cz.gadder.bx.mappings.ValueMappingFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.Duration;
 import java.util.List;
 
 import static cz.gadder.bx.instructions.InstructionMapFactory.createBFInstructionSet;
@@ -47,7 +50,8 @@ class MultiTapeTest {
                         .addInstructionSet(createBFInstructionSet())
                         .addInstructionSet(createMultiTapeInstructionSet())
                         .build(),
-                memorySectorSize
+                memorySectorSize,
+                Duration.ZERO
         );
 
         Program program = Program.from(".+.+..▲+++.▲++++.+.+.▼.▲+.▼▼.▲▲+.+.");
@@ -72,7 +76,8 @@ class MultiTapeTest {
                         .addInstructionSet(createBFInstructionSet())
                         .addInstructionSet(createMultiTapeInstructionSet())
                         .build(),
-                memorySectorSize
+                memorySectorSize,
+                Duration.ZERO
         );
 
         Program program = Program.from(".+.+..▼+++.▼++++.+.+.▲.▼+.▲▲.▼▼+.+.");

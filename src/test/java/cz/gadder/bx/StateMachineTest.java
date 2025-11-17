@@ -1,6 +1,7 @@
 package cz.gadder.bx;
 
-import cz.gadder.bx.interpreters.StateMachine;
+import cz.gadder.bx.interpreter.InterpreterManifest;
+import cz.gadder.bx.interpreter.StateMachine;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

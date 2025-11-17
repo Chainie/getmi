@@ -1,7 +1,10 @@
 package cz.gadder.bx;
 
-import cz.gadder.bx.interpreters.MachineInterpreter;
+import cz.gadder.bx.cmd.Args;
+import cz.gadder.bx.interpreter.InterpreterManifest;
+import cz.gadder.bx.interpreter.MachineInterpreter;
 import com.beust.jcommander.JCommander;
+import cz.gadder.bx.interpreter.Program;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +18,9 @@ public class Main {
     }
 
     private void run() {
-        MachineInterpreter.forProgram(Program.from(args.getProgramCode())).runProgram();
+        MachineInterpreter
+                .forProgramAndManifest(Program.from(args.getProgramCode()), InterpreterManifest.createFromArgs(args))
+                .runProgram();
     }
 
     private static Args parseArguments(String[] argv) {

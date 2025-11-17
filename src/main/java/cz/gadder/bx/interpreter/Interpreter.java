@@ -1,6 +1,4 @@
-package cz.gadder.bx.interpreters;
-
-import cz.gadder.bx.Program;
+package cz.gadder.bx.interpreter;
 
 public interface Interpreter {
 
