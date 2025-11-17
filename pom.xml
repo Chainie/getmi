@@ -4,9 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cz.gadder.bx</groupId>
-    <artifactId>BrainX</artifactId>
+    <groupId>cz.gadger</groupId>
+    <artifactId>getmi</artifactId>
     <version>1.0.0</version>
+
+    <description>
+        Generic Turing Machine Interpret (GeTMI) is used for running programs from turing machine family
+        such as BrainF**k and other esoteric programming languages.
+        Its goal is to be easily extensible with implementation of additional instructions and functionalities
+        these languages requires.
+    </description>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -96,7 +103,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cz.gadder.bx.Main</mainClass>
+                                    <mainClass>cz.gadger.gtmi.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
