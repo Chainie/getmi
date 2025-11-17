@@ -40,8 +40,7 @@ class TestExamples {
     @DisplayName("Hello World! works")
     void testHelloWorld() {
         String code = """
-                ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.
-                >---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
+                ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
                 """;
         MachineInterpreter interpreter = MachineInterpreter.forProgram(Program.from(code));
         assertThat(interpreter.runProgram()).isZero();

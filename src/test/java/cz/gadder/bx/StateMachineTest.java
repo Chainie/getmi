@@ -58,11 +58,12 @@ class StateMachineTest {
         stateMachine.printDataFromActiveMemorySector();
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo("" + ((char) 45));
 
-        String input = "" + ((char) 48);
+        String input = "" + ('a');
+        standardOut.println(">>" + input);
         InputStream testInput = new ByteArrayInputStream(input.getBytes());
         System.setIn(testInput);
         stateMachine.readInputToActiveMemorySector();
-        assertThat(stateMachine.getValueAtActiveMemorySector()).isEqualTo((char) 48);
+        assertThat(stateMachine.getValueAtActiveMemorySector()).isEqualTo('a');
 
         testInput.reset();
     }
