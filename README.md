@@ -1,6 +1,6 @@
 # GeTMI 🧠
 
-Generic Turing Machine Interpret (GeTMI) is used for running programs from turing machine family such as [BrainF**k](https://esolangs.org/wiki/Brainfuck)
+Generic Turing Machine Interpreter (GeTMI) is used for running programs from turing machine family such as [BrainF**k](https://esolangs.org/wiki/Brainfuck)
 and other esoteric programming languages. Its goal is to be easily extensible with implementation of additional instructions and functionalities these languages requires.
 
 ## Version
@@ -28,13 +28,17 @@ Hello World!
 ```
 
 ## Download
+
 Gradle:
+
 ```
 dependencies {
     implementation("io.github.chainie:getmi:1.0.0")
 }
 ```
+
 Maven:
+
 ```
 <dependency>
     <groupId>io.github.chainie</groupId>
@@ -45,7 +49,7 @@ Maven:
 
 ## Currently supported features
 
-* Infinite tape support* - memory sectors implemented as linked list 
+* Infinite tape support* - memory sectors implemented as linked list
 * Multi-tape support - using extended instruction set for switching between tapes
 * Configurable memory sector size - not limited to standard 0-255 size
 * Configurable input/output char set - not limited to standard ASCI char set
@@ -53,7 +57,7 @@ Maven:
 * Configurable delay time between executing individual instructions
 * Configurable instruction set
   * Currently in v1.0.0, supports only [BrainF**k](https://esolangs.org/wiki/Brainfuck) notation and instruction for multi-tapes
-  * Can be easily extended with user-defined instruction 
+  * Can be easily extended with user-defined instruction
 
 \*Up to a memory limit ofc..
 
