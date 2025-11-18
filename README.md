@@ -31,7 +31,7 @@ Hello World!
 Gradle:
 ```
 dependencies {
-implementation("io.github.chainie:getmi:1.0.0")
+    implementation("io.github.chainie:getmi:1.0.0")
 }
 ```
 Maven:
