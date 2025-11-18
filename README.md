@@ -27,6 +27,22 @@ The output of the program will be printed to standard output:
 Hello World!
 ```
 
+## Download
+Gradle:
+```
+dependencies {
+implementation("io.github.chainie:getmi:1.0.0")
+}
+```
+Maven:
+```
+<dependency>
+    <groupId>io.github.chainie</groupId>
+    <artifactId>getmi</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 ## Currently supported features
 
 * Infinite tape support* - memory sectors implemented as linked list 
