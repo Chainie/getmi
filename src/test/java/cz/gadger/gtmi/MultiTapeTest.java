@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.time.Duration;
 import java.util.List;
 
 import static cz.gadger.gtmi.instructions.InstructionsSetFactory.createBFInstructionSet;
@@ -51,7 +50,7 @@ class MultiTapeTest {
                         .addInstructionSet(createMultiTapeInstructionSet())
                         .build(),
                 memorySectorSize,
-                Duration.ZERO
+                List.of()
         );
 
         Program program = Program.from(".+.+..▲+++.▲++++.+.+.▼.▲+.▼▼.▲▲+.+.");
@@ -77,7 +76,7 @@ class MultiTapeTest {
                         .addInstructionSet(createMultiTapeInstructionSet())
                         .build(),
                 memorySectorSize,
-                Duration.ZERO
+                List.of()
         );
 
         Program program = Program.from(".+.+..▼+++.▼++++.+.+.▲.▼+.▲▲.▼▼+.+.");

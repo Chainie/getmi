@@ -12,8 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.time.Duration;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -77,7 +80,7 @@ class TestExamples {
                 valueMapping,
                 InstructionsSetFactory.createBFInstructionMap(),
                 memorySectorSize,
-                Duration.ZERO
+                List.of()
         );
 
         Program program = Program.from(".+.+..+.+.+.+.---.++++.-----.++++++.+.");
@@ -107,7 +110,7 @@ class TestExamples {
                 valueMapping,
                 InstructionsSetFactory.createBFInstructionMap(),
                 MemorySectorSize.createByteSize(),
-                Duration.ZERO
+                List.of()
         );
 
         Program program = Program.from("++++.");
@@ -128,7 +131,7 @@ class TestExamples {
                 valueMapping,
                 InstructionsSetFactory.createBFInstructionMap(),
                 MemorySectorSize.createByteSize(),
-                Duration.ZERO
+                List.of()
         );
         String input = ("a");
         InputStream testInput = new ByteArrayInputStream(input.getBytes());

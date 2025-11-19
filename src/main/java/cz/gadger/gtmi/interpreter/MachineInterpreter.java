@@ -1,11 +1,13 @@
 package cz.gadger.gtmi.interpreter;
 
 import cz.gadger.gtmi.instructions.Instruction;
+import cz.gadger.gtmi.listeners.ExecutionListener;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jspecify.annotations.NonNull;
 
+import java.util.List;
 import java.util.Map;
 
 import static cz.gadger.gtmi.instructions.InstructionsSetFactory.EMPTY_INSTRUCTION;
@@ -21,6 +23,8 @@ public class MachineInterpreter implements Interpreter {
 
     private final InterpreterManifest manifest;
 
+    private final List<ExecutionListener> executionListeners;
+
     private MachineInterpreter(Program program) {
         this(program, InterpreterManifest.createDefault());
     }
@@ -31,6 +35,7 @@ public class MachineInterpreter implements Interpreter {
         this.manifest = manifest;
         this.activeStateMachine = StateMachine.of(manifest);
         this.instructionMap = manifest.instructionMap();
+        this.executionListeners = manifest.executionListeners();
     }
 
     @NonNull
@@ -47,16 +52,15 @@ public class MachineInterpreter implements Interpreter {
     @SneakyThrows
     public int runProgram() {
         while (program.isNotFinished()) {
-            executeNextInstruction();
-            if (manifest.stepDelay().isPositive()) {
-               Thread.sleep(manifest.stepDelay());
-            }
+            Instruction instruction = instructionMap.getOrDefault(program.getActiveInstructionCode(), EMPTY_INSTRUCTION);
+            executionListeners.forEach(el -> el.beforeInstructionExecution(this, instruction));
+            executeNextInstruction(instruction);
+            executionListeners.forEach(el -> el.afterInstructionExecution(this, instruction));
         }
         return 0;
     }
 
-    private void executeNextInstruction() {
-        Instruction instruction = instructionMap.getOrDefault(program.getActiveInstructionCode(), EMPTY_INSTRUCTION);
+    private void executeNextInstruction(Instruction instruction) {
         instruction.accept(this);
         if (instruction.shouldPostIncrementInstructionPointer()) {
             program.incrementInstructionPointer();

@@ -41,6 +41,9 @@ public class Args {
     @Parameter(names = {"-d", "--delay"},  description = "Step delay between code instruction execution (default = 0)")
     private Integer stepDelayMs = 0;
 
+    @Parameter(names = {"-dfc", "--delayForCodes"},  description = "List of instructions to wait after (default on output = .)")
+    private List<Character> delayInstructionCodes = new ArrayList<>();
+
     @Parameter(names = {"--memFit"},  description = "Fit max memory size to the world list size (default false)")
     private boolean memFit;
 

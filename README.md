@@ -27,6 +27,10 @@ The output of the program will be printed to standard output:
 Hello World!
 ```
 
+## Usage
+
+See [Usage documentation ](/docs/usage.md)
+
 ## Download
 
 Gradle:
