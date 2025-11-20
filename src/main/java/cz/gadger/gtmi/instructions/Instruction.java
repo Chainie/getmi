@@ -8,5 +8,7 @@ public interface Instruction extends Consumer<Interpreter> {
 
     char getInstructionCode();
 
-    boolean shouldPostIncrementInstructionPointer();
+    default boolean shouldPostIncrementInstructionPointer() {
+        return true;
+    }
 }

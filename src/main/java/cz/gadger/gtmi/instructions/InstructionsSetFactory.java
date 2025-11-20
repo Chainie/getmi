@@ -34,6 +34,11 @@ public class InstructionsSetFactory {
         return this;
     }
 
+    public InstructionsSetFactory addInstruction(Instruction instruction) {
+        builder.add(instruction);
+        return this;
+    }
+
     public Map<Character, Instruction> build() {
         return builder.build().collect(Collectors.toMap(Instruction::getInstructionCode, Function.identity()));
     }

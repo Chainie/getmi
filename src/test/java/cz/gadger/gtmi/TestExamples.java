@@ -1,10 +1,8 @@
 package cz.gadger.gtmi;
 
+import cz.gadger.gtmi.instructions.Instruction;
 import cz.gadger.gtmi.instructions.InstructionsSetFactory;
-import cz.gadger.gtmi.interpreter.InterpreterManifest;
-import cz.gadger.gtmi.interpreter.MachineInterpreter;
-import cz.gadger.gtmi.interpreter.MemorySectorSize;
-import cz.gadger.gtmi.interpreter.Program;
+import cz.gadger.gtmi.interpreter.*;
 import cz.gadger.gtmi.mappings.ValueMapping;
 import cz.gadger.gtmi.mappings.ValueMappingFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -18,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -144,5 +143,37 @@ class TestExamples {
 
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo("?");
         testInput.reset();
+    }
+
+    @Test
+    @DisplayName("Custom instruction test")
+    void testCustomInstruction() {
+        String code = "X";
+
+        Map<Character, Instruction> customInstructionSet = InstructionsSetFactory.builder()
+                .addInstruction(new Instruction() {
+                    @Override
+                    public char getInstructionCode() {
+                        return 'X';
+                    }
+
+                    @Override
+                    public void accept(Interpreter interpreter) {
+                        IO.println("Hello World!");
+                    }
+                })
+                .build();
+
+        InterpreterManifest manifest = InterpreterManifest.create(
+                ValueMappingFactory.createDefault(),
+                customInstructionSet,
+                MemorySectorSize.createByteSize(),
+                List.of()
+        );
+
+        MachineInterpreter interpreter = MachineInterpreter.forProgramAndManifest(Program.from(code), manifest);
+        assertThat(interpreter.runProgram()).isZero();
+
+        assertThat(outputStreamCaptor.toString().trim()).isEqualTo("Hello World!");
     }
 }
